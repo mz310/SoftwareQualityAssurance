@@ -104,18 +104,28 @@ Method coverage ≈ 20% (18/89 метод)
 Line coverage ≈ 18%
 
 Branch coverage ≈ 12%
+## Лаб 08 – White Box Structural Testing Report
 
-Дотор нь:
+#### Coverage Tool: IntelliJ IDEA Code Coverage Runner
+#### Project: Meeting Planner
+#### Testing Level: Structural White Box Test (statement + branch focus)
+#### Coverage tool: IntelliJ IDEA Built-in Coverage Runner
+#### Coverage Result:
 
-Calendar – зарим замууд л гүйж байсан (нэмэлт branch-ууд, алдааны замууд test хийгдээгүй).
+Лаб 07 дээр бичсэн functional unit test-үүд дээр суурилж white-box structural coverage test нэмсэн. Кодын дотоод салбарлалт (branch) болон statement хамрах хүрээг нэмэгдүүлэх зорилгоор Calendar болон Meeting классууд дээр boundary болон edge-case scenario-ууд давхар тестлэсэн.
+Class Coverage: 91%
 
-Meeting – зөвхөн нэг toString зам гүйсэн, constructor-ууд, add/removeAttendee, getter/setter-үүд test хийгдээгүй.
+Method Coverage: 65%
 
-Organization, Person, Room – ихэнх метод 0% coverage-тэй байсан.
+Line Coverage: 48%
 
-PlannerInterface – консоль IO-той тул энэ лабораторид зориудаар алгассан.
+Branch Coverage: 31%
+3. Нэмэлтээр нэмсэн функүүд
 
-TimeConflictException – зөвхөн exception класс, тусгай логикгүй тул алгассан.
+Calendar.addMeeting overlap path
+Calendar.checkTimes invalid input branch test
+Meeting.toString минимал болон өргөтгөсөн (with room & attendees) формат
+Busy / Free time window ялгалт
 
-### Дүгнэлт: Лаб 07-ын тестүүд зөвхөн функциональ happy path-ыг голчлон шалгаж,
-### кодын дотоод бүтэц (if/else салбарууд, error path-ууд) хангалттай хамрагдаагүй байна.
+White-box test нэмснээр өмнө functional test-ээр хамрагдаагүй branch-ууд test coverage-д орсон.
+Code өөрчлөлт / bug-fix хийгээгүй. Зөвхөн test-case нэмсэн.
