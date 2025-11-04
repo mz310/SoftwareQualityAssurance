@@ -1,5 +1,7 @@
 ##  Лаборатори-8-ийн тайлан — Meeting Planner White box testing
+[Лаборатори №8.pdf](https://github.com/user-attachments/files/23342655/8.pdf)
 Анхны байдлаар зөвхөн functional утгатай хэдхэн тест ажиллуулж,
+
 IntelliJ-ээр “Run with Coverage” хийж үзэхэд:
 
 Package edu.sc.csce747.MeetingPlanner
