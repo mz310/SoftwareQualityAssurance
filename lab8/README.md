@@ -92,3 +92,30 @@ toString() NPE — room/attendees null үед NPE.
 Зөв шийдэл: конструкторуудад attendees = new ArrayList<>(), roomId = (room!=null?room.getID():"(no-room)") гэх мэт баталгаажуулалт.
 
 ##  Лаборатори-8-ийн тайлан — Meeting Planner White box testing
+Анхны байдлаар зөвхөн functional утгатай хэдхэн тест ажиллуулж,
+IntelliJ-ээр “Run with Coverage” хийж үзэхэд:
+
+Package edu.sc.csce747.MeetingPlanner
+
+Class coverage ≈ 50% (6/12 клаcc)
+
+Method coverage ≈ 20% (18/89 метод)
+
+Line coverage ≈ 18%
+
+Branch coverage ≈ 12%
+
+Дотор нь:
+
+Calendar – зарим замууд л гүйж байсан (нэмэлт branch-ууд, алдааны замууд test хийгдээгүй).
+
+Meeting – зөвхөн нэг toString зам гүйсэн, constructor-ууд, add/removeAttendee, getter/setter-үүд test хийгдээгүй.
+
+Organization, Person, Room – ихэнх метод 0% coverage-тэй байсан.
+
+PlannerInterface – консоль IO-той тул энэ лабораторид зориудаар алгассан.
+
+TimeConflictException – зөвхөн exception класс, тусгай логикгүй тул алгассан.
+
+# Дүгнэлт: Лаб 07-ын тестүүд зөвхөн функциональ happy path-ыг голчлон шалгаж,
+# кодын дотоод бүтэц (if/else салбарууд, error path-ууд) хангалттай хамрагдаагүй байна.
