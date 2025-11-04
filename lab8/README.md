@@ -113,6 +113,7 @@ Branch coverage ≈ 12%
 #### Coverage Result:
 
 Лаб 07 дээр бичсэн functional unit test-үүд дээр суурилж white-box structural coverage test нэмсэн. Кодын дотоод салбарлалт (branch) болон statement хамрах хүрээг нэмэгдүүлэх зорилгоор Calendar болон Meeting классууд дээр boundary болон edge-case scenario-ууд давхар тестлэсэн.
+
 Class Coverage: 91%
 
 Method Coverage: 65%
