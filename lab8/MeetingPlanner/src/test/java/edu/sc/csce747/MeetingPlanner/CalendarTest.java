@@ -4,7 +4,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class CalendarTest {
-    
+
+    /** 1) Амралтын өдөр (бүх өдөр) нэмэхэд тухайн өдөр завгүй болох ёстой */
     @Test
     public void testAddHolidayMarksBusy() {
         Calendar calendar = new Calendar();
@@ -18,6 +19,7 @@ public class CalendarTest {
         }
     }
 
+    /** 2) Энгийн уулзалт нэмээд янз бүрийн цагт завгүй/чөлөөтэй эсэхийг шалгах */
     @Test
     public void testAddMeetingAndCheckBusyTimes() throws Exception {
         Calendar calendar = new Calendar();
@@ -27,11 +29,14 @@ public class CalendarTest {
         assertFalse(calendar.isBusy(6, 1, 11, 12)); // гадуур нь
     }
 
+    /** 2.1) Чөлөөтэй үед isBusy=false байх ёстой */
     @Test
     public void testIsBusyWhenFree() throws Exception {
         Calendar calendar = new Calendar();
         assertFalse(calendar.isBusy(7, 7, 14, 15));
     }
+
+    /** 2.2) addMeeting амжилттай зам (explicit) */
     @Test
     public void testAddMeetingSuccess() throws Exception {
         Calendar calendar = new Calendar();
@@ -39,6 +44,7 @@ public class CalendarTest {
         assertTrue(calendar.isBusy(7, 7, 14, 15));
     }
 
+    /** 3) Буруу сар/өдөр/цаг өгсөн үед exception шидэх ёстой */
     @Test
     public void testInvalidMonthDayAndTimeThrowException() {
         // month = 0
@@ -65,6 +71,8 @@ public class CalendarTest {
             fail("Expected TimeConflictException for start >= end");
         } catch (TimeConflictException expected) {}
     }
+
+    /** 4) Давхцсан уулзалтыг зөвшөөрөх ёсгүй (wrap/containment) */
     @Test
     public void testOverlappingMeetingsNotAllowed() throws Exception {
         Calendar calendar = new Calendar();
@@ -78,6 +86,7 @@ public class CalendarTest {
         } catch (TimeConflictException expected) {}
     }
 
+    /** 5) Огт байхгүй өдөр (2/30 гэх мэт) дээр уулзалт хийхийг зөвшөөрөх ёсгүй */
     @Test
     public void testNonexistentDateNotAllowed() {
         Calendar calendar = new Calendar();
@@ -87,6 +96,7 @@ public class CalendarTest {
         } catch (TimeConflictException expected) {}
     }
 
+    /** 6) 12-р сар хүчинтэй сар байх ёстой */
     @Test
     public void testDecemberIsValidMonth() {
         Calendar calendar = new Calendar();
@@ -97,6 +107,8 @@ public class CalendarTest {
             fail("December should be a valid month. Check month validation: " + e.getMessage());
         }
     }
+
+    /** 7) clearSchedule: тухайн өдрийн бүх уулзалтыг цэвэрлэнэ */
     @Test
     public void testClearScheduleRemovesAllMeetings() throws Exception {
         Calendar calendar = new Calendar();
@@ -106,6 +118,8 @@ public class CalendarTest {
         calendar.clearSchedule(8, 2);
         assertFalse(calendar.isBusy(8, 2, 8, 9));
     }
+
+    /** 8) printAgenda(month) болон printAgenda(month, day) хоёрыг дор дор нь ажиллуулж үзэх */
     @Test
     public void testPrintAgendaForMonthAndDay() throws Exception {
         Calendar calendar = new Calendar();
@@ -118,6 +132,8 @@ public class CalendarTest {
         assertTrue(monthAgenda.contains("Standup"));
         assertTrue(dayAgenda.contains("Standup"));
     }
+
+    /** 9) getMeeting болон removeMeeting-ийг ашиглах */
     @Test
     public void testGetAndRemoveMeetingByIndex() throws Exception {
         Calendar calendar = new Calendar();
