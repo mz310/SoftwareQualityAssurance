@@ -120,7 +120,8 @@ Method Coverage: 65%
 Line Coverage: 48%
 
 Branch Coverage: 31%
-3. Нэмэлтээр нэмсэн функүүд
+
+#### 3. Нэмэлтээр нэмсэн функүүд
 
 Calendar.addMeeting overlap path
 Calendar.checkTimes invalid input branch test
