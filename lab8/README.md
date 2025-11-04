@@ -1,4 +1,4 @@
-##  Лабораторийн тайлан — Meeting Planner (JUnit4)
+##  Лаборатори-7-ийн тайлан — Meeting Planner (JUnit4)
 Meeting Planner төслийн үндсэн логик (хуанли, уулзалт, өрөө, ажилтан, байгууллага) дээр албан бус тестийн төлөвлөгөө боловсруулах, JUnit4 ашиглан нэгж тестүүдийг бичиж, эерэг/сөрөг тохиолдлуудыг системтэйгээр хамруулсан. 
 
 Туршилтын хамрах хүрээ:
@@ -83,8 +83,12 @@ testPrintAgenda_containsDescription —Pass.
 
 Байхгүй өдөр дээр уулзалт нэмэгдэх боломж — placeholder "Day does not exist"-ийг үл тоомсорлож нэмчихэж магадгүй (жишээ: 2/30).
 
+
+
 Зөв шийдэл: календарийн огнооны хүчинтэй байдлыг checkTimes-д сар тус бүрийн өдөртэй уялдуулан нягталж, буруу бол шууд Exception.
 
 toString() NPE — room/attendees null үед NPE.
 
 Зөв шийдэл: конструкторуудад attendees = new ArrayList<>(), roomId = (room!=null?room.getID():"(no-room)") гэх мэт баталгаажуулалт.
+
+##  Лаборатори-8-ийн тайлан — Meeting Planner White box testing
