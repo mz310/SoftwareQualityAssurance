@@ -3,104 +3,92 @@ package edu.sc.csce747.MeetingPlanner;
 import java.util.ArrayList;
 
 public class Meeting {
-	private int month;
-	private int day;
-	private int start;
-	private int end;
-	private ArrayList<Person> attendees; 
-	private Room room;
-	private String description;
-	
-	/**
-	 * Default constructor
-	 */
-	public Meeting(){
-	}
-	
-	/**
-	 * Constructor that can be used to block off a whole day -
-	 * such as for a vacation
-	 * @param month - The month of the meeting (1-12).
-	 * @param day - The day of the meeting (1-31).
-	 */
-	public Meeting(int month, int day){
-		this.month=month;
-		this.day=day;
-		this.start=0;
-		this.end=23;
-	}
-	
-	/**
-	 * Constructor that can be used to block off a whole day -
-	 * such as for a vacation
-	 * @param month - The month of the meeting (1-12).
-	 * @param day - The day of the meeting (1-31).
-	 * @param description - A description of the meeting.
-	 */
-	public Meeting(int month, int day, String description){
-		this.month=month;
-		this.day=day;
-		this.start=0;
-		this.end=23;
-		this.description= description;
-	}
-	
-	/**
-	 * More detailed constructor
-	 * @param month - The month of the meeting (1-12).
-	 * @param day - The day of the meeting (1-31).
-	 * @param start - The time the meeting starts (0-23).
-	 * @param end - The time the meeting ends (0-23).
-	 */
-	public Meeting(int month, int day, int start, int end){
-		this.month=month;
-		this.day=day;
-		this.start=start;
-		this.end=end;
-	}
-	
-	/**
-	 * More detailed constructor
-	 * @param month - The month of the meeting (1-12).
-	 * @param day - The day of the meeting (1-31).
-	 * @param start - The time the meeting starts (0-23).
-	 * @param end - The time the meeting ends (0-23).
-	 * @param attendees - The people attending the meeting.
-	 * @param room - The room that the meeting is taking place in.
-	 * @param description - A description of the meeting.
-	 */
-	public Meeting(int month, int day, int start, int end, ArrayList<Person> attendees, Room room, String description){
-		this.month=month;
-		this.day=day;
-		this.start=start;
-		this.end=end;
-		this.attendees = attendees;
-		this.room = room;
-		this.description = description;
-	}
+    private int month;
+    private int day;
+    private int start;
+    private int end;
+    private ArrayList<Person> attendees;
+    private Room room;
+    private String description;
 
-	/**
-	 * Add an attendee to the meeting.
-	 * @param attendee - The person to add.
-	 */
-	public void addAttendee(Person attendee) {
-		this.attendees.add(attendee);
-	}
-	
-	/**
-	 * Removes an attendee from the meeting.
-	 * @param attendee - The person to remove.
-	 */
-	public void removeAttendee(Person attendee) {
-		this.attendees.remove(attendee);
-	}
-	
-	/**
-	 * Returns information about the meeting as a formatted string.
-	 * @return String - Information about the meeting.
-	 */
+    /**
+     * Default constructor
+     */
+    public Meeting() {
+        this.month = 0;
+        this.day = 0;
+        this.start = 0;
+        this.end = 0;
+        this.description = "";
+        this.room = null;
+        this.attendees = new ArrayList<>();   // ЭНД ЗААВАЛ ИНИЦИАЛИЗ ХИЙНЭ
+    }
+
+    /**
+     * Constructor that can be used to block off a whole day -
+     * such as for a vacation
+     */
+    public Meeting(int month, int day){
+        this();               // default constructor-оо дуудна
+        this.month = month;
+        this.day = day;
+        this.start = 0;
+        this.end = 23;
+    }
+
+    /**
+     * Constructor that can be used to block off a whole day -
+     * such as for a vacation
+     */
+    public Meeting(int month, int day, String description){
+        this(month, day);     // дээрхийнээ дуудна
+        this.description = description;
+    }
+
+    /**
+     * More detailed constructor
+     */
+    public Meeting(int month, int day, int start, int end){
+        this();               // attendees-г null биш болгоно
+        this.month = month;
+        this.day = day;
+        this.start = start;
+        this.end = end + 1;
+    }
+
+    /**
+     * More detailed constructor
+     */
+    public Meeting(int month, int day, int start, int end,
+                   ArrayList<Person> attendees, Room room, String description){
+        this(month, day, start, end);   // дээрхийнээ дуудна
+        this.room = room;
+        this.description = description;
+        this.attendees = (attendees == null ? new ArrayList<>() : attendees);
+    }
+
+    /**
+     * Add an attendee to the meeting.
+     */
+    public void addAttendee(Person attendee) {
+        if (attendee == null) return;
+        this.attendees.add(attendee);
+    }
+
+    /**
+     * Removes an attendee from the meeting.
+     */
+    public void removeAttendee(Person attendee) {
+        if (attendees == null) return;  // хамгаалалт, гэхдээ одоо бол null биш байх ёстой
+        this.attendees.remove(attendee);
+    }
+
+    /**
+     * Returns information about the meeting as a formatted string.
+     */
+    @Override
     public String toString() {
-        String roomPart = (room == null) ? "(no-room)" : room.getID(); 
+        String roomPart = (room == null) ? "(no-room)" : room.getID();
         String descPart = (description == null) ? "(no-description)" : description;
 
         StringBuilder info = new StringBuilder();
@@ -115,68 +103,32 @@ public class Meeting {
             for (Person attendee : attendees) {
                 info.append(attendee.getName()).append(",");
             }
-            // төгсгөл дэх нэмж орсон таслалыг авах
+            // төгсгөлийн илүү таслалыг арилгана
             info.setLength(info.length() - 1);
         }
 
         return info.toString();
     }
 
-	
-	/**
-	 * Getters and Setters
-	 */
-	
-	public int getMonth() {
-		return month;
-	}
+    // Getters / setters...
 
-	public void setMonth(int month) {
-		this.month = month;
-	}
+    public int getMonth() { return month; }
+    public void setMonth(int month) { this.month = month; }
 
-	public int getDay() {
-		return day;
-	}
+    public int getDay() { return day; }
+    public void setDay(int day) { this.day = day; }
 
-	public void setDay(int day) {
-		this.day = day;
-	}
+    public int getStartTime() { return start; }
+    public void setStartTime(int start) { this.start = start; }
 
-	public int getStartTime() {
-		return start;
-	}
+    public int getEndTime() { return end; }
+    public void setEndTime(int end) { this.end = end; }
 
-	public void setStartTime(int start) {
-		this.start = start;
-	}
+    public ArrayList<Person> getAttendees() { return attendees; }
 
-	public int getEndTime() {
-		return end;
-	}
+    public Room getRoom() { return room; }
+    public void setRoom(Room room) { this.room = room; }
 
-	public void setEndTime(int end) {
-		this.end = end;
-	}
-
-	public ArrayList<Person> getAttendees() {
-		return attendees;
-	}
-
-	public Room getRoom() {
-		return room;
-	}
-
-	public void setRoom(Room room) {
-		this.room = room;
-	}
-	
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 }
