@@ -56,4 +56,20 @@ public class MeetingTest {
         assertTrue(out.contains("14"));
         assertTrue(out.contains("16"));
     }
+
+    @Test
+    public void testToString_NoTrailingComma() {
+        ArrayList<Person> attendees = new ArrayList<>();
+        attendees.add(new Person("Alice"));
+        attendees.add(new Person("Bob"));
+        Room room = new Room("R1");
+
+        Meeting m = new Meeting(10, 10, 9, 10, attendees, room, "Daily");
+        String s = m.toString();
+
+        // Эцэст нь таслалгүй байх ёстой (жишээ нь ",Alice,Bob" → "Bob," биш "Bob")
+        assertFalse(s.endsWith(","));
+    }
+
+
 }
