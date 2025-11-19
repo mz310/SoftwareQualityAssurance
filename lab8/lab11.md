@@ -1,186 +1,130 @@
-# 1. Introduction
+### Лаборатор 11 Мутацийн тест
 
-Өмнөх лабораторийн ажлуудад бид Meeting Planner программын unit tests–ийг бичсэн.
-Энэ лабораторийн зорилго нь эдгээр тестүүд үнэхээр чанартай, хүрэлцээтэй эсэхийг Mutation Testing ашиглан үнэлэх явдал юм.
+Энэ лабораторийн зорилго нь өмнөх лабораторийн Meeting Planner програм дээр бичсэн unit tests–ийн чанар болон хамрах хүрээг Mutation Testing ашиглан үнэлэх явдал юм.
 
-Mutation testing гэдэг нь:
+Mutation Testing нь дараах зарчим дээр суурилдаг:
 
-Кодны логикт зориудаар жижиг алдаа (mutant) оруулах
+Кодонд зориуд жижиг алдаа (mutant) оруулна
 
-Тестүүд эдгээр алдааг илрүүлж чадсан уу гэдгийг шалгах
+Тестүүд энэ алдааг илрүүлж чадаж байна уу гэдгийг шалгана
 
-# 2. Mutants Created
+Илрүүлж чадвал → Killed
 
-Энэ лабораторид бид Calendar болон Meeting хоёр классын кодон дээр нийт 5 mutant үүсгэв.
+Илрүүлж чадахгүй бол → Survived
 
-## 2.1 Calendar Mutants
-C-M1 — Logical Operator Mutant
+### 2. Мутац үүсгэсэн
 
-Original:
+Энэ лабораторид бид Calendar болон Meeting классууд дээр нийт 5 mutant гар аргаар үүсгэсэн.
+### C-M1 — Logical Operator Mutant
 
-if(start >= toCheck.getStartTime() && start <= toCheck.getEndTime())
+Анх:
 
-
-Mutant:
-
-if(start >= toCheck.getStartTime() || start <= toCheck.getEndTime())
+    if (start >= toCheck.getStartTime() && start <= toCheck.getEndTime()) {
 
 
-Effect:
-|| нь илүү өргөн тэлсэн тул ихэнх үед true болж → календар завгүй гэж худлаа үзнэ.
+Мутац оруулалт:
 
-Killed by:
-testIsBusyWhenFree()
-→ Idle slot–ыг завгүй гэж худлаа буцаана.
-
-C-M2 — Comparison Mutant (Month boundary)
-
-Original (corrected code):
-
-if(mMonth < 1 || mMonth > 12)
+    if (start >= toCheck.getStartTime() || start <= toCheck.getEndTime()) {
 
 
-Mutant:
+Нөлөө нь: || нь илүү өргөн логик тул бараг бүх үед busy = true болно
+Killed by: testIsBusyWhenFree()
 
-if(mMonth < 1 || mMonth >= 12)
+### C-M2 — Мутацийн харьцуулалт (Month boundary)
 
+Анх (зөв хувилбар):
 
-Effect:
-12-р сар хүчин төгөлдөр мөртлөө алдаатай гэж үзнэ.
-
-Killed by:
-testDecemberIsValidMonth()
-
-C-M3 — Comparison Mutant (start/end)
-
-Original:
-
-if(mStart >= mEnd)
+    if (mMonth < 1 || mMonth > 12)
 
 
-Mutant:
+Мутац:
 
-if(mStart > mEnd)
-
-
-Effect:
-start == end үед алдаа шидэхгүй → буруу.
-
-Killed by:
-
-try {
-    Calendar.checkTimes(6, 10, 10, 10);
-    fail();
-} catch(TimeConflictException expected){}
-
-## 2.2 Meeting Mutants
-M-M1 — Arithmetic Mutant (end + 1)
-
-Original:
-
-this.end = end;
+    if (mMonth < 1 || mMonth >= 12)
 
 
-Mutant:
+Нөлөө нь: 12-р сар хүчингүй болно
+Killed by: testDecemberIsValidMonth()
 
-this.end = end + 1;
+### C-M3 — Мутацийн харьцуулалт (start/end)
 
+Анх:
 
-Effect:
-Meeting(14,16) → (14,17) болж хувирна.
-
-Killed by:
-
-@Test
-public void testToString_TimeOnlyMeeting() {
-    Meeting m = new Meeting(7,3,14,16);
-    String out = m.toString();
-    assertTrue(out.contains("16"));   // FAIL if mutated
-}
-
-M-M2 — String Logic Mutant (Remove substring logic)
-
-Original:
-
-info.setLength(info.length() - 1);  // remove trailing comma
+    if (mStart >= mEnd)
 
 
-Mutant:
+Мутац:
 
-// info.setLength(info.length() - 1);
+    if (mStart > mEnd)
 
 
-Effect:
-Attending: Alice,Bob, → trailing comma алга болохгүй.
+ Нөлөө: start == end үед алдаа барихгүй
+ Killed by:
 
+    try {
+        Calendar.checkTimes(6, 10, 10, 10);
+        fail();
+    } catch(TimeConflictException expected) {}
+
+##  2.2 Meeting Мутац
+###  M-M1 — Arithmetic Мутац (end + 1)
+
+Анх:
+
+    this.end = end;
+
+
+Мутац хэрэгжүүлэлт:
+    
+    this.end = end + 1;
+
+
+ Нөлөө: Meeting(14,16) → 14–17 болж хувирна
+ Killed by:
+
+    assertTrue(out.contains("16"));
+
+### M-M2 — String Logic Мутац (Remove trailing comma fix)
+
+Анх:
+
+    info.setLength(info.length() - 1);
+
+
+Мутац:
+
+    // info.setLength(info.length() - 1);
+
+
+Нөлөө:
+"Attending: Alice,Bob," → trailing comma үлдэнэ
 Killed by:
 
-assertFalse(s.endsWith(","));
-
-# 3. Mutation Table
-Mutant ID	Location	Mutation	Killed by	Status
-C-M1	Calendar.isBusy	&& → `		`
-C-M2	Calendar.checkTimes	> 12 → >= 12	testDecemberIsValidMonth	Killed
-C-M3	Calendar.checkTimes	>= → >	testStartEqualsEnd	Killed
-M-M1	Meeting constructor	end → end + 1	testToString_TimeOnlyMeeting	Killed
-M-M2	Meeting.toString	remove setLength	testToString_NoTrailingComma	Killed
-# 4. Mutation Score
-
-Formula:
-
-Mutation Score = Killed / (Total - Equivalent)
-
-
-Values:
-
-Total Mutants = 5
-
-Equivalent Mutants = 0
-
-Killed = 5
-
-Mutation Score = 5 / 5 = 1.00 (100%)
-
-# 5. Analysis
-
-Тестүүд логик болон boundary нөхцөлүүдийг сайн хамарсан:
-
-Logical operator errors (&&, ||)
-
-Comparison boundary (>=, >)
-
-Arithmetic mistakes (+1 mutants)
-
-String formatting errors
-
-Meeting.toString() дээрх trailing comma тест маш сайн mutant-killer болсон.
-
-Calendar.checkTimes boundary tests холбогдох мутантуудыг 100% барьж чадсан.
-
-# 6. Conclusion
-
-Энэ лабораторийн ажилд үүсгэсэн 5 mutant–аас бүгдийг unit тестүүд амжилттай илрүүлж KILL хийсэн бөгөөд төслийн Mutation Score нь:
- 100% (Perfect)
-
-Энэ нь:
-
-Boundary testing
-
-Logical operator coverage
-
-String formatting verification
-
-зэрэг чухал хэсгүүдийг unit tests маш сайн хамарч байгааг харуулж байна.
-
-# 7. Appendix: Key Test Cases
-@Test
-public void testToString_NoTrailingComma() {
-    ArrayList<Person> attendees = new ArrayList<>();
-    attendees.add(new Person("Alice"));
-    attendees.add(new Person("Bob"));
-    Room room = new Room("R1", 10);
-
-    Meeting m = new Meeting(10, 10, 9, 10, attendees, room, "Daily");
-    String s = m.toString();
     assertFalse(s.endsWith(","));
-}
+
+##  3. Мутацийн хүснэгт байдлаар
+| Мутац  ID | Байрлал             | Мутац                | Test Killing Mutant            | Үр дүн   |                      |          |
+| --------- | ------------------- | -------------------- | ------------------------------ | -------- | -------------------- | -------- |
+| **C-M1**  | Calendar.isBusy     | `&&` → `             |                                | `        | `testIsBusyWhenFree` |  Killed |
+| **C-M2**  | Calendar.checkTimes | `>12` → `>=12`       | `testDecemberIsValidMonth`     |  Killed |                      |          |
+| **C-M3**  | Calendar.checkTimes | `>=` → `>`           | `testStartEqualsEnd`           |  Killed |                      |          |
+| **M-M1**  | Meeting constructor | `end = end + 1`      | `testToString_TimeOnlyMeeting` |  Killed |                      |          |
+| **M-M2**  | Meeting.toString    | Remove comma removal | `testToString_NoTrailingComma` |  Killed |                      |          |
+
+## 4. Шинжилгээ
+Unit тестүүд:
+
+    Logical operator errors
+    Boundary conditions
+    Arithmetic deviations
+    String formatting bugs
+    ийг маш сайн барьж чадсан.
+    Ялангуяа:
+        testToString_NoTrailingComma
+        testIsBusyWhenFree
+
+гэдэг хоёр тест mutation-killer үүргийг сайн гүйцэтгэсэн.
+    Equivalent mutant илрээгүй нь тестүүд бүх логикийг сайн хучиж байгааг харуулж байна.
+## 5 Дүгнэлт
+Бүх 5 мутант тестүүдээр дамжуулан KILL хийгдсэн.
+Meeting болон Calendar класс дээрх boundary & logic шалгалтууд сайн хамгаалагдсан.
+→ тестүүд маш чанартай, логик алдаа барих чадвартай.
