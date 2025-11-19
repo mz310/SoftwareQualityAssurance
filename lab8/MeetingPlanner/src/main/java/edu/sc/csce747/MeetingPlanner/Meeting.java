@@ -99,17 +99,29 @@ public class Meeting {
 	 * Returns information about the meeting as a formatted string.
 	 * @return String - Information about the meeting.
 	 */
-	public String toString(){
-		String info=month+"/"+day+", "+start+" - "+end+","+room.getID()+": "+description+"\nAttending: ";
-		
-		for(Person attendee : attendees){
-			info=info+attendee.getName()+",";
-		}
-		
-		info=info.substring(0,info.length()-1);
-		
-		return info;
-	}
+    public String toString() {
+        String roomPart = (room == null) ? "(no-room)" : room.getID(); 
+        String descPart = (description == null) ? "(no-description)" : description;
+
+        StringBuilder info = new StringBuilder();
+        info.append(month).append("/").append(day)
+                .append(", ").append(start).append(" - ").append(end)
+                .append(",").append(roomPart).append(": ").append(descPart)
+                .append("\nAttending: ");
+
+        if (attendees == null || attendees.isEmpty()) {
+            info.append("(none)");
+        } else {
+            for (Person attendee : attendees) {
+                info.append(attendee.getName()).append(",");
+            }
+            // төгсгөл дэх нэмж орсон таслалыг авах
+            info.setLength(info.length() - 1);
+        }
+
+        return info.toString();
+    }
+
 	
 	/**
 	 * Getters and Setters
