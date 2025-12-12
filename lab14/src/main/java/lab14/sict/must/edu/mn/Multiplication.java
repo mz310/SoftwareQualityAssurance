@@ -3,7 +3,7 @@ package lab14.sict.must.edu.mn;
 public class Multiplication {
 
   /**
-   * Multiplies two numbers using straightforward arithmetic.
+   * Multiplies two operands and returns the raw product.
    *
    * @param left left operand
    * @param right right operand
