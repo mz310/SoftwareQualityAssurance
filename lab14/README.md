@@ -1,20 +1,20 @@
-# Lab 14 – Maven + Git Workflow Demo
+﻿# Лаб 14 – Maven ба Git workflow демо
 
-This project is a small calculator used to demonstrate Git flow, GitHub Actions CI, Checkstyle, JUnit 5, and JaCoCo 100% branch coverage.
+Энэ төсөл нь жижиг тооны машин бөгөөд Git flow, GitHub Actions CI, Checkstyle, JUnit 5, JaCoCo 100% branch coverage-ийг жишээгээр харуулна.
 
-## Build and test
-- `mvn test` – run JUnit 5 tests
-- `mvn checkstyle:check` – enforce the Checkstyle rules in `checkstyle.xml`
-- `mvn jacoco:report` – generate HTML coverage report under `target/site/jacoco/index.html`
-- `mvn jacoco:check` – enforce 100% branch coverage (used by CI)
+## Барих ба тестлэх
+- `mvn test` – JUnit 5 тестүүдийг ажиллуулна
+- `mvn checkstyle:check` – `checkstyle.xml` дахь дүрмийг мөрдүүлнэ
+- `mvn jacoco:report` – `target/site/jacoco/index.html` хавтас дахь HTML хамралтын тайланг гаргана
+- `mvn jacoco:check` – 100% branch coverage-ийн шаардлагыг шалгана (CI-д хэрэглэнэ)
 
-## Project layout
-- Source: `src/main/java/lab14/sict/must/edu/mn`
-- Tests: `src/test/java/lab14/sict/must/edu/mn`
-- CI workflow: `.github/workflows/ci.yml` (runs on pushes/PRs to `develop` and `release/*`)
+## Төслийн бүтэц
+- Эх код: `src/main/java/lab14/sict/must/edu/mn`
+- Тест: `src/test/java/lab14/sict/must/edu/mn`
+- CI workflow: `.github/workflows/ci.yml` (`develop`, `release/*` руу push/PR дээр ажиллана)
 
-## Git workflow (to apply on GitHub)
-1. Protect `main` branch: require PRs, require status checks (CI workflow), require up-to-date branches, disallow bypass.
-2. Work on `develop`, create feature branches (e.g., `feature/add-multiplication`, `feature/add-division`), merge via PR with “Create a merge commit”.
-3. Create release branches (e.g., `release/v1.0.0`) and tags (`v1.0.0`, `v1.0.1`), plus hotfix branches when needed.
-4. Document any merge conflict resolutions in `conflict_resolution.md`.
+## Git workflow (GitHub дээр хэрэгжүүлэх)
+1. `main` салааг хамгаал: PR шаард, статусын шалгалт (CI) шаард, салбар шинэ байхыг шаард, bypass-ийг хоригло.
+2. `develop` дээр ажиллаж, онцлог салбарууд (`feature/add-multiplication`, `feature/add-division` гэх мэт) үүсгээд PR-ээр "Create a merge commit" сонголтоор нэгтгэнэ.
+3. Release салбарууд (`release/v1.0.0`) болон tag-ууд (`v1.0.0`, `v1.0.1`) үүсгэнэ, шаардлагатай бол hotfix салбар нэмнэ.
+4. Merge conflict-ийн шийдлүүдийг `conflict_resolution.md` файлд тэмдэглэ.
