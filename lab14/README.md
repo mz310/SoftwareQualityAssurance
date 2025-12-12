@@ -7,6 +7,12 @@
 - `mvn checkstyle:check` – `checkstyle.xml` дахь дүрмийг мөрдүүлнэ
 - `mvn jacoco:report` – `target/site/jacoco/index.html` хавтас дахь HTML хамралтын тайланг гаргана
 - `mvn jacoco:check` – 100% branch coverage-ийн шаардлагыг шалгана (CI-д хэрэглэнэ)
+- JaCoCo замын анхааруулга: төсөл Mongolian/non-ASCII замд байрласан тул `pom.xml` Jacoco-ийн `destFile`/`dataFile` нь `%TEMP%/jacoco.exec` рүү заадаг; ажиллуулахад тусгай тохиргоо шаардлагагүй.
+
+### IntelliJ дээр
+1. `File > Open` → `lab14` хавтасыг сонгоод Project SDK-г 17 (эсвэл JDK24 + language level 17) болгож тохируул.
+2. Maven tool window-оос `Lifecycle > test` эсвэл Run Anything (`Ctrl+Ctrl`) → `mvn test`/`mvn jacoco:check`/`mvn checkstyle:check` командыг ажиллуул.
+3. Coverage тайлан: `mvn jacoco:report` хийсний дараа `target/site/jacoco/index.html`-ийг нээ.
 
 ## Төслийн бүтэц
 - Эх код: `src/main/java/lab14/sict/must/edu/mn`
