@@ -18,4 +18,10 @@ class DivisionTest {
     Division division = new Division();
     assertThrows(IllegalArgumentException.class, () -> division.divide(5.0, 0.0));
   }
+
+  @Test
+  void throwsWhenDividingByNearZero() {
+    Division division = new Division();
+    assertThrows(IllegalArgumentException.class, () -> division.divide(5.0, 1.0E-10));
+  }
 }
