@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-healing Automation Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #555;
+            margin-top: 30px;
+        }
+        .code-block {
+            background: #f4f4f4;
+            padding: 15px;
+            border-left: 4px solid #4CAF50;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .old-version {
+            background-color: #ffebee;
+            border-left-color: #f44336;
+        }
+        .new-version {
+            background-color: #e8f5e9;
+            border-left-color: #4CAF50;
+        }
+        .ai-suggestion {
+            background-color: #e3f2fd;
+            border-left-color: #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>АЖИЛ 3: SELF-HEALING AUTOMATION ОЙЛГОЛТ</h1>
+        
+        <h2>А. Анхны HTML UI элемент:</h2>
+        <div class="code-block">
+            &lt;button id="loginBtn"&gt;Login&lt;/button&gt;
+        </div>
+        
+        <h2>Уламжлалт Selenium код:</h2>
+        <div class="code-block">
+            driver.find_element(By.ID, "loginBtn").click()
+        </div>
+        
+        <h2>B. Эвдрэл үүсгэх - HTML өөрчлөлт:</h2>
+        <div class="code-block old-version">
+            &lt;!-- Хуучин (эвдэрсэн) --&gt;<br>
+            &lt;button id="loginBtn"&gt;Login&lt;/button&gt;<br><br>
+            &lt;!-- Шинэ (өөрчлөгдсөн) --&gt;<br>
+            &lt;button id="signinButton"&gt;Login&lt;/button&gt;
+        </div>
+        
+        <p><strong>Асуудал:</strong> ID өөрчлөгдсөн тул уламжлалт Selenium код эвдэрнэ!</p>
+        
+        <h2>C. AI санал болгосон Self-healing шийдлүүд:</h2>
+        
+        <div class="ai-suggestion">
+            <h3>1. Dynamic Locator Strategy (Олон locator-уудыг туршиж үзэх):</h3>
+            <div class="code-block">
+def find_element_with_fallback(driver):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;locators = [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(By.ID, "loginBtn"),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(By.ID, "signinButton"),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(By.XPATH, "//button[contains(text(), 'Login')]"),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(By.CSS_SELECTOR, "button.login-button"),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(By.CLASS_NAME, "btn-login")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for locator in locators:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;element = driver.find_element(*locator)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if element.is_displayed():<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return element<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except NoSuchElementException:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br>
+&nbsp;&nbsp;&nbsp;&nbsp;raise Exception("Login button not found with any locator")
+            </div>
+        </div>
+        
+        <div class="ai-suggestion">
+            <h3>2. Text-based Locator (Текст дээр суурилсан):</h3>
+            <div class="code-block">
+# Текст нь ихэвчлэн байнга хэвээр байдаг<br>
+driver.find_element(By.XPATH, "//button[text()='Login']").click()<br>
+# эсвэл<br>
+driver.find_element(By.XPATH, "//button[contains(text(), 'Login')]").click()
+            </div>
+        </div>
+        
+        <div class="ai-suggestion">
+            <h3>3. AI-powered Self-healing (Testim.io / Mabl style):</h3>
+            <div class="code-block">
+# AI нь DOM-ийг шинжилж, хамгийн найдвартай locator-ийг сонгоно<br>
+# Confidence scoring ашиглана:<br>
+# - ID: 90% confidence<br>
+# - Text match: 85% confidence<br>
+# - CSS selector: 70% confidence<br>
+# - XPath: 65% confidence<br>
+# AI нь хамгийн өндөр confidence-тай locator-ийг автоматаар сонгоно
+            </div>
+        </div>
+        
+        <div class="ai-suggestion">
+            <h3>4. Visual Locator (Computer Vision):</h3>
+            <div class="code-block">
+# Screenshot-аас "Login" товчийг олох<br>
+# AI нь зураг дээрх байрлал, хэмжээ, өнгө зэргийг ашиглана<br>
+# Энэ нь DOM өөрчлөгдсөн ч ажиллана
+            </div>
+        </div>
+        
+        <h2>D. Self-healing зарчмын давуу тал:</h2>
+        <ul>
+            <li><strong>Robustness:</strong> UI өөрчлөгдсөн ч тест ажиллана</li>
+            <li><strong>Maintenance reduction:</strong> Locator-уудыг байнга засах шаардлагагүй</li>
+            <li><strong>AI Intelligence:</strong> Хамгийн найдвартай locator-ийг автоматаар сонгоно</li>
+            <li><strong>Confidence scoring:</strong> Locator-ийн найдвартай байдлыг үнэлнэ</li>
+        </ul>
+        
+        <h2>E. Жишээ: Шинэ DOM-оос AI санал болгосон locator-ууд:</h2>
+        <div class="code-block new-version">
+&lt;button id="signinButton" class="btn-primary" data-testid="login-button"&gt;Login&lt;/button&gt;
+        </div>
+        
+        <div class="ai-suggestion">
+            <h3>AI санал болгосон locator-ууд (priority дарааллаар):</h3>
+            <ol>
+                <li><strong>By.XPATH, "//button[text()='Login']"</strong> - 95% confidence (текст тогтвортой)</li>
+                <li><strong>By.CSS_SELECTOR, "button.btn-primary"</strong> - 80% confidence (class name)</li>
+                <li><strong>By.XPATH, "//button[@data-testid='login-button']"</strong> - 90% confidence (test attribute)</li>
+                <li><strong>By.ID, "signinButton"</strong> - 70% confidence (ID өөрчлөгдөж болно)</li>
+            </ol>
+        </div>
+        
+        <h2>Дүгнэлт:</h2>
+        <p>Self-healing automation нь AI-ийн тусламжтайгаар UI өөрчлөлтөд автоматаар дасан зохицож, 
+        тестийн найдвартай байдлыг нэмэгдүүлнэ. Энэ нь UI automation-ийн хамгийн том асуудлуудын 
+        нэг болох "brittle tests" (эмзэг тестүүд)-ийг шийдэхэд тусална.</p>
+        
+        <!-- Demo button -->
+        <button id="signinButton" class="btn-primary" data-testid="login-button">Login</button>
+    </div>
+</body>
+</html>
+

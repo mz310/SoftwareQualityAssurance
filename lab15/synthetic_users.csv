@@ -1,0 +1,22 @@
+id,name,email,age,country,role
+1,Бат Батбаяр,user1_бат@example.com,32,Монгол,Admin
+2,Цэцэг Цэцэгмаа,user2_цэцэг@testmail.com,28,Америк,User
+3,Очир Очирбат,user3_очир@demo.org,45,Канад,Manager
+4,Сараа Сараа,user4_сараа@sample.net,23,Герман,Developer
+5,Төмөр Төмөрбат,user5_төмөр@mockemail.com,38,Франц,Tester
+6,Мөнх Мөнхбат,user6_мөнх@fakemail.org,29,Япон,Analyst
+7,Энх Энхбат,user7_энх@dummy.net,42,Солонгос,Designer
+8,Болд Болдбат,user8_болд@example.com,35,Хятад,Guest
+9,Алтан Алтанбат,user9_алтан@testmail.com,27,Орос,Moderator
+10,Сүрэн Сүрэнбат,user10_сүрэн@demo.org,31,Австрали,Viewer
+11,Билгүүн Билгүүн,user11_билгүүн@sample.net,39,Монгол,Admin
+12,Номин Номин,user12_номин@mockemail.com,26,Америк,User
+13,Дэлгэр Дэлгэрбат,user13_дэлгэр@fakemail.org,44,Канад,Manager
+14,Жаргал Жаргалбат,user14_жаргал@dummy.net,33,Герман,Developer
+15,Эрдэнэ Эрдэнэбат,user15_эрдэнэ@example.com,25,Франц,Tester
+16,Алтанцэцэг Алтанцэцэг,user16_алтанцэцэг@testmail.com,37,Япон,Analyst
+17,Мөнхцэцэг Мөнхцэцэг,user17_мөнхцэцэг@demo.org,30,Солонгос,Designer
+18,Оюун Оюунбат,user18_оюун@sample.net,41,Хятад,Guest
+19,Сайхан Сайханбат,user19_сайхан@mockemail.com,24,Орос,Moderator
+20,Батбаяр Батбаяр,user20_батбаяр@fakemail.org,36,Австрали,Viewer
+
